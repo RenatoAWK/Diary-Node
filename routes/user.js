@@ -4,13 +4,13 @@ const Postgres = require('./postgres');
 
 function signup(email, password, retorno){
     const query = `insert into diary._user(__email, __password) values ('${email}','${password}')`;
-    let postgres = new Postgres();
+    const postgres = new Postgres();
     return postgres.query(query,"insert", retorno);
 }
 
 function login(email, password, retorno){
-    const query = `select * from diary._user where __email = '${email}'`;
-    let postgres = new Postgres();
+    const query = `select * from diary._user where __email = '${email}' and __password = '${password}'`;
+    const postgres = new Postgres();
     return postgres.query(query,"select", retorno)
 }
 

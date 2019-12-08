@@ -18,7 +18,7 @@ class Postgres{
 
                 case "select":
                     client.query(query, (err, res) => {
-                        if (err || res.rows.length === 0) return retorno.json({"status":"not OK"});
+                        if (err || res.rows.length !== 1) return retorno.json({"status":"not OK"});
                         return retorno.json(res.rows)
                     })
             }
