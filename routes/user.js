@@ -1,33 +1,31 @@
 var express = require('express');
 var router = express.Router();
+const Postgres = require('./postgres');
 
-function signup(email, password){
-    console.log("Pegou o cadastro");
-    console.log("E-mail: ",email);
-    console.log("Password: ",password);
+function signup(email, password, retorno){
+    const query = `insert into diary._user(__email, __password) values ('${email}','${password}')`;
+    let postgres = new Postgres();
+    return postgres.query(query,"insert", retorno);
 }
 
-function login(email, password){
-    console.log("Pegou o login");
-    console.log("E-mail: ",email);
-    console.log("Password: ",password);
+function login(email, password, retorno){
+    const query = `select * from diary._user where __email = '${email}'`;
+    let postgres = new Postgres();
+    return postgres.query(query,"select", retorno)
 }
 
 router.post('/',function (req, res, next) {
-    switch (req.body.type) {
-        case "signup": signup(req.body.email, req.body.password);
-            break;
-        case "login": login(req.body.email, req.body.password);
-            break;
-        default:
-            console.log("Caiu fora");
+    if (req.body.type === "signup"){
+        signup(req.body.email, req.body.password, res)
+
+    } else if (req.body.type === "login"){
+        login(req.body.email, req.body.password, res)
+
     }
-    res.send("OK")
+
 });
 
-router.get('/', function (req, res, next) {
-    console.log("Get funcionando")
-    res.send("OK")
-});
+
+
 
 module.exports = router;
