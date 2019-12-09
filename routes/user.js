@@ -4,14 +4,12 @@ const Postgres = require('./postgres');
 
 function signup(email, password, retorno){
     const query = `insert into diary._user(__email, __password) values ('${email}','${password}')`;
-    const postgres = new Postgres();
-    return postgres.query(query,"insert", retorno);
+    return Postgres.query(query,"insert", retorno);
 }
 
 function login(email, password, retorno){
     const query = `select * from diary._user where __email = '${email}' and __password = '${password}'`;
-    const postgres = new Postgres();
-    return postgres.query(query,"select", retorno)
+    return Postgres.query(query,"select", retorno)
 }
 
 router.post('/',function (req, res, next) {

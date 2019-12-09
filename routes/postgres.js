@@ -1,11 +1,13 @@
-class Postgres{
-    query(query, type, retorno) {
-        const { Client } = require('pg');
-        const client = new Client({
-            connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
-        });
+const { Client } = require('pg');
+const client = new Client({
+    connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
+});
 
-        client.connect();
+client.connect();
+
+class Postgres{
+    static query(query, type, retorno) {
+
 
         try {
             switch (type) {
