@@ -12,6 +12,7 @@ class Postgres{
                 case "insert":
                     client.query(query, (err, res) => {
                         if (err) return retorno.json({"status":"not OK"});
+                        client.end();
                         return retorno.json({"status":"OK"});
                     });
                     break;
@@ -19,12 +20,15 @@ class Postgres{
                 case "select":
                     client.query(query, (err, res) => {
                         if (err || res.rows.length !== 1) return retorno.json({"status":"not OK"});
+                        client.end();
                         return retorno.json(res.rows)
                     })
             }
         } catch (e) {
-            return JSON.parse("not OK")
+            client.end();
+            return retorno.json({"status":"not OK"});
         }
+
     }
 }
 
