@@ -14,9 +14,11 @@ function login(email, password, retorno){
 
 router.post('/',function (req, res, next) {
     if (req.body.type === "signup"){
+        console.log("Request signup");
         signup(req.body.email, req.body.password, res)
 
     } else if (req.body.type === "login"){
+        console.log("Request login");
         login(req.body.email, req.body.password, res)
 
     }
