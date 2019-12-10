@@ -8,7 +8,7 @@ function signup(email, password, retorno){
 }
 
 function login(email, password, retorno){
-    const query = `select * from diary._user where __email = '${email}' and __password = '${password}'`;
+    const query = `select * from diary._user where __email ilike '${email}' and __password = '${password}'`;
     return Postgres.query(query,"select", retorno)
 }
 
