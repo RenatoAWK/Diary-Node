@@ -27,7 +27,7 @@ class Postgres{
                             return retorno.json({"status":"not OK"});
                         }
                         client.end();
-                        return retorno.json(res.rows)
+                        return retorno.json(res.rows[0])
                     })
             }
         } catch (e) {
