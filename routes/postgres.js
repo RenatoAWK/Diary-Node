@@ -3,12 +3,9 @@ const client = new Client({
     connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
 });
 
-client.connect();
-
 class Postgres{
     static query(query, type, retorno) {
-
-
+        client.connect();
         try {
             switch (type) {
                 case "insert":
