@@ -1,10 +1,11 @@
 const { Client } = require('pg');
-const client = new Client({
-    connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
-});
+
 
 class Postgres{
     static query(query, type, retorno) {
+        const client = new Client({
+            connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
+        });
         client.connect();
         try {
             switch (type) {
