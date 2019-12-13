@@ -27,13 +27,14 @@ class Postgres{
                             return retorno.json({"status":500});
                         }
                         client.end();
-                        return retorno.json(res.rows[0]["status"]=200)
+                        let result = {"status":200,"results":res.rows};
+                        return retorno.json(result)
                     })
             }
         } catch (e) {
             client.end();
             console.log(e);
-            return retorno.json({"status":"not OK"});
+            return retorno.json({"status":406});
         }
 
     }
