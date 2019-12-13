@@ -13,10 +13,10 @@ class Postgres{
                     client.query(query, (err, res) => {
                         if (err) {
                             console.log(err);
-                            return retorno.json({"status":"not OK"});
+                            return retorno.json({"status":500});
                         }
                         client.end();
-                        return retorno.json({"status":"OK"});
+                        return retorno.json({"status":201});
                     });
                     break;
 
@@ -24,10 +24,10 @@ class Postgres{
                     client.query(query, (err, res) => {
                         if (err || res.rows.length !== 1) {
                             console.log(err);
-                            return retorno.json({"status":"not OK"});
+                            return retorno.json({"status":500});
                         }
                         client.end();
-                        return retorno.json(res.rows[0])
+                        return retorno.json(res.rows[0]["status"]=200)
                     })
             }
         } catch (e) {
