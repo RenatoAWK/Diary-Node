@@ -7,21 +7,9 @@ function signup(email, password, retorno){
     return Postgres.query(query,"insert", retorno);
 }
 
-function login(email, password, retorno){
-    const query = `select * from diary._user where __email ilike '${email}' and __password = '${password}'`;
-    return Postgres.query(query,"select", retorno)
-}
-
 router.post('/',function (req, res, next) {
-    if (req.body.type === "signup"){
         console.log("Request signup");
         signup(req.body.email, req.body.password, res)
-
-    } else if (req.body.type === "login"){
-        console.log("Request login");
-        login(req.body.email, req.body.password, res)
-
-    }
 
 });
 
