@@ -8,9 +8,21 @@ function insert(id_user, text, emotion, created, edited, res){
     return Postgres.query(query,"insert", res, values)
 }
 
+function selectAll(id_user, res){
+    const values = [id_user,];
+    const query = `select __id, __text, __emotion, __created, __edited from diary._note where __id_user=$1 `;
+    return Postgres.query(query, "select", res, values);
+}
+
 router.post('/',function (req, res, next) {
         console.log("Request note");
         insert(req.body.id_user, req.body.text, req.body.emotion, req.body.created, req.body.edited, res);
+
+});
+
+router.get('/', function (req, res, next) {
+        console.log("Request note");
+        selectAll(req.query.id_user, res);
 
 });
 
