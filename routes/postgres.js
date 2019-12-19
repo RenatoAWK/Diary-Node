@@ -2,7 +2,7 @@ const { Client } = require('pg');
 
 
 class Postgres{
-    static query(query, type, retorno) {
+    static query(query, type, retorno, values) {
         const client = new Client({
             connectionString: process.env.DATABASE_URL_DIARY, ssl:true,
         });
@@ -10,7 +10,7 @@ class Postgres{
         try {
             switch (type) {
                 case "insert":
-                    client.query(query, (err, res) => {
+                    client.query(query, values, (err, res) => {
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
@@ -21,7 +21,7 @@ class Postgres{
                     break;
 
                 case "select":
-                    client.query(query, (err, res) => {
+                    client.query(query, values, (err, res) => {
                         if (err || res.rows.length !== 1) {
                             console.log(err);
                             return retorno.json({"status":500});
