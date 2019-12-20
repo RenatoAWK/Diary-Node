@@ -22,7 +22,6 @@ class Postgres{
 
                 case "select":
                     client.query(query, values, (err, res) => {
-                        console.log(res.rows);
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
