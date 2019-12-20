@@ -20,6 +20,28 @@ class Postgres{
                     });
                     break;
 
+                case "update":
+                    client.query(query, values, (err, res) => {
+                        if (err) {
+                            console.log(err);
+                            return retorno.json({"status":500});
+                        }
+                        client.end();
+                        return retorno.json({"status":200});
+                    });
+                    break;
+
+                case "remove":
+                    client.query(query, values, (err, res) => {
+                        if (err) {
+                            console.log(err);
+                            return retorno.json({"status":500});
+                        }
+                        client.end();
+                        return retorno.json({"status":200});
+                    });
+                    break;
+
                 case "select":
                     client.query(query, values, (err, res) => {
                         if (err) {
