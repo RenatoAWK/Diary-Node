@@ -44,11 +44,11 @@ class Postgres{
 
                 case "select":
                     client.query(query, values, (err, res) => {
+                        client.end();
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
                         }
-                        client.end();
                         let result = {"status":200,"results":res.rows};
                         return retorno.json(result)
                     })
