@@ -11,33 +11,33 @@ class Postgres{
             switch (type) {
                 case "insert":
                     client.query(query, values, (err, res) => {
+                        client.end();
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
                         }
-                        client.end();
                         return retorno.json({"status":201});
                     });
                     break;
 
                 case "update":
                     client.query(query, values, (err, res) => {
+                        client.end();
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
                         }
-                        client.end();
                         return retorno.json({"status":200});
                     });
                     break;
 
                 case "remove":
                     client.query(query, values, (err, res) => {
+                        client.end();
                         if (err) {
                             console.log(err);
                             return retorno.json({"status":500});
                         }
-                        client.end();
                         return retorno.json({"status":200});
                     });
                     break;
